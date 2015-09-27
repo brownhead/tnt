@@ -19,14 +19,14 @@ var MatchBox = React.createClass({
       type: 'POST',
       data: post_data,
       success: function(data) {
+        var new_data = _.reject(this.state.data, function(match) {
+          return match.id == post_data.other_id;
+        });
+        this.setState({data: new_data});
       }.bind(this),
       error: function(xhr, status, err) {
       }.bind(this)
     });
-    var new_data = _.reject(this.state.data, function(match) {
-      return match.id == post_data.other_id;
-    });
-    this.setState({data: new_data});
   },
   getInitialState: function() {
     return {data: []};
